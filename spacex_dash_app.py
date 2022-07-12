@@ -47,7 +47,7 @@ app.layout = html.Div(children=[html.H1('SpaceX Launch Records Dashboard',
                                                 min=0, max=10000, step=1000,
                                                 marks={0: '0',
                                                     100: '100'},
-                                                value=[min_payload, max_payload])
+                                                value=[min_payload, max_payload]),
 
                                 # TASK 4: Add a scatter chart to show the correlation between payload and launch success
                                 html.Div(dcc.Graph(id='success-payload-scatter-chart')),
@@ -59,9 +59,9 @@ app.layout = html.Div(children=[html.H1('SpaceX Launch Records Dashboard',
 @app.callback(Output(component_id='success-pie-chart', component_property='figure'),
               Input(component_id='site-dropdown', component_property='value'))
 def get_pie_chart(site_dropdown):
-    if entered_site == 'ALL':
+    if site_dropdown == 'ALL':  
         piechart = px.pie(data_frame = spacex_df, values='class', 
-                    names='Launch Site', values='class' ,title='Total Launches for All Sites')
+                    names='Launch Site', title='Total Launches for All Sites')
         return piechart
     else:
         # return the outcomes piechart for a selected site
