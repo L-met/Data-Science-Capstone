@@ -24,13 +24,13 @@ app.layout = html.Div(children=[html.H1('SpaceX Launch Records Dashboard',
                                   dcc.Dropdown(id='site-dropdown',
                                                 options=[
                                                     {'label': 'All Sites', 'value': 'ALL'},
-                                                    {'label': 'VAFB SLC-4E', 'value': 'site1'},
-                                                    {'label': 'KSC LC-39A', 'value': 'site2'},
-                                                    {'label': 'CCAFS LC-40', 'value': 'site3'},
-                                                    {'label': 'CCAFS SLC-40', 'value': 'site4'},
+                                                    {'label': 'VAFB SLC-4E', 'value': 'VAFB SLC-4E'},
+                                                    {'label': 'KSC LC-39A', 'value': 'KSC LC-39A'},
+                                                    {'label': 'CCAFS LC-40', 'value': 'CCAFS LC-40'},
+                                                    {'label': 'CCAFS SLC-40', 'value': 'CCAFS SLC-40'},
                                                     ],
                                                 value='ALL',
-                                                placeholder="place holder here",
+                                                placeholder="Select a Launch Site here",
                                                 searchable=True
                                             ),
                                 html.Br(),
@@ -62,13 +62,13 @@ def get_pie_chart(site_dropdown):
     if site_dropdown == 'ALL':  
         piechart = px.pie(data_frame = spacex_df, values='class', 
                     names='Launch Site', title='Total Launches for All Sites')
-        return piechart
+        #return piechart
     else:
         # return the outcomes piechart for a selected site
         specific_df=spacex_df.loc[spacex_df['Launch Site'] == site_dropdown]
-        piechart = px.pie(data_frame = specific_df,
-                    names='class',title='Total Launch for a Specific Site')
-        return piechart
+        piechart = px.pie(data_frame = specific_df
+                    names='Launch Site',title='Total Launch for a Specific Site')
+    return piechart
 
 # TASK 4:
 # Add a callback function for `site-dropdown` and `payload-slider` as inputs, `success-payload-scatter-chart` as output
